@@ -3,7 +3,7 @@ var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y + 55;
     this.speed = speed;
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = 'images/Bullet Bill.png';
     this.step = 101;
     this.boundary = this.step * 5;
     this.resetPos = -this.step;
@@ -38,7 +38,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 class Hero {
     constructor () {
-        this.sprite = 'images/char-boy.png';
+        this.sprite = 'images/Mario.png';
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
