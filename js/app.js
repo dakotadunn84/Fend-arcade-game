@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x,y, speed) {
+var Enemy = function(x, y, speed) {
     this.x = x;
     this.y = y + 55;
     this.speed = speed;
@@ -42,13 +42,23 @@ class Hero {
         this.step = 101;
         this.jump = 83;
         this.startX = this.step * 2;
-        this.startY = (this.jump * 5) - 20;
+        this.startY = (this.jump * 4) + 55;
         this.x = this.startX;
         this.y = this.startY;
+        this.victory = false;
     }
-
+    update() {
+        for(let enemy of allEnemies) {
+            if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2)) {
+              this.reset();
+            }
+        }
+        if(this.y === 55) {
+            this.victory = true;
+        }
+    }
         // Draw player sprite on current x and y coord position
-        render () {
+    render () {
             ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
         }
 
@@ -58,7 +68,7 @@ class Hero {
             *@param {string} input - Direction to travel
             *
             */
-            handleInput(input) {
+    handleInput(input) {
                 switch(input) {
                     case 'left':
                         if ( this.x > 0) {
@@ -81,7 +91,11 @@ class Hero {
                         }
                         break;
                 }
-            }
+      }
+    reset() {
+        this.y = this.startY;
+        this.x = this.startX;
+    }
 }
 // New Hero object
 const player = new Hero();
